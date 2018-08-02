@@ -1,12 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import User from "./User";
+import UsersList from "./UsersList";
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <div>
-        <User />
-        {/* <Table /> */}
+        <User title={"Student"} />
+
+        <UsersList />
       </div>
     );
   }

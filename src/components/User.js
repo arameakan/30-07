@@ -1,52 +1,48 @@
 import React, { Component } from "react";
-import { addUser } from "../actions";
+import { connect } from "react-redux";
+import { addUser } from "../actions/users";
 
 class User extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {
-        name: "",
-        age: ""
-      }
+      username: "",
+      age: ""
     };
+
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
-    const target = e.target;
-    const value = target.value;
-    const name = target.name;
+    const { name, value } = e.target;
 
-    this.setState(prevState => ({
-      data: {
-        ...prevState.data,
-        [name]: value
-      }
-    }));
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    this.props.addUser(this.state);
   }
 
   render() {
     return (
       <div>
-        <form
-          onSubmit={e => {
-            e.preventDefault();
-            dispatch(addUser(data));
-          }}
-        >
+        <h2>{this.props.title}</h2>
+        <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            name="name"
-            placeholder="Name"
-            value={this.state.data.name}
+            name="username"
+            placeholder="Username"
             onChange={this.handleChange}
           />
           <input
             type="number"
             name="age"
             placeholder="Age"
-            value={this.state.data.age}
             onChange={this.handleChange}
           />
           <button type="submit">Add User</button>
@@ -56,4 +52,13 @@ class User extends Component {
   }
 }
 
-export default User;
+const mapStateToProps = null;
+
+const actionCreators = {
+  addUser
+};
+
+export default connect(
+  mapStateToProps,
+  actionCreators
+)(User);
