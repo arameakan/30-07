@@ -7,16 +7,20 @@ class UsersList extends Component {
 
     return (
       <table>
-        <tr>
-          <td>Name</td>
-          <td>Age</td>
-        </tr>
+        <thead>
+          <tr>
+            <td>Name</td>
+            <td>Age</td>
+          </tr>
+        </thead>
         {users.map((user, key) => {
           return (
-            <tr key={key}>
-              <td>{user.username}</td>
-              <td>{user.age}</td>
-            </tr>
+            <tbody key={key}>
+              <tr>
+                <td>{user.username}</td>
+                <td>{user.age}</td>
+              </tr>
+            </tbody>
           );
         })}
       </table>
